@@ -1,0 +1,8 @@
+.words-left, .middle, .top-words {
+  text-align: center;
+  color: white;
+}
+
+.keyboard {
+  background-color: rgb(18, 18, 19);
+}

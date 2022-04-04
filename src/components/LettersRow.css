@@ -1,0 +1,28 @@
+.letter-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.letter {
+  font-weight: bold;
+  padding: 0.5em;
+  margin: 0.2em;
+  width: 1.5em;
+  height: 1.5em;
+  text-align: center;
+  color: white;
+  font-size: 23px;
+}
+
+.letter[bg-color="b"] {
+  background-color: rgb(58, 58, 60);
+}
+
+.letter[bg-color="y"] {
+  background-color: rgb(181, 159, 59);
+}
+
+.letter[bg-color="g"] {
+  background-color: rgb(83, 141, 78);
+}

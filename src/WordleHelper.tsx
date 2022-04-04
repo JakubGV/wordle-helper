@@ -1,5 +1,7 @@
 import './WordleHelper.css';
 
+import { Helper } from './components/Helper';
+
 const WordleHelper = () => {
   return (
     <div className="background">
@@ -12,9 +14,8 @@ const WordleHelper = () => {
           </div>
         </div>  
         <div className="helper">
-          { /* <Helper /> */ }
+          <Helper />
         </div>
-
       </div>
     </div>
   )
