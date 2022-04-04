@@ -21,7 +21,7 @@ const useKeydownListener = (handler: any) => {
     return () => {
       window.removeEventListener(eventName, eventListener);
     };
-  }, [eventName, window]);
+  }, [eventName]);
 };
 
 export const Helper = () => {
@@ -50,6 +50,12 @@ export const Helper = () => {
     ['b', 'b', 'b', 'b', 'b'],
   ]
   const [gridColors, setGridColors] = useState(defaultColors);
+
+  const handleEnterPress = () => {
+    // Move to the next row
+    setCurrentRow(currentRow + 1);
+    setCurrentCol(0);
+  }
 
   // Handles a press on a physical keyboard
   const handleKeyPress = (event: KeyboardEvent) => {
@@ -81,7 +87,7 @@ export const Helper = () => {
       }
     }
     else if (pressedKey === 'ENTER' || pressedKey === '{enter}') {
-      // handleEnterPress();
+      handleEnterPress();
       return;
     }
     else if (tempLetters[4] !== ' ') { // Don't add more than 5 letters
@@ -107,7 +113,7 @@ export const Helper = () => {
       <div className="middle">Top 10 words</div>
       <div className="top-words">{top10Words.slice(0,6).join(' ')}</div>
       <div className="top-words">{top10Words.slice(6, 10).join(' ')}</div>
-      <Grid gridLetters={gridLetters} gridColors={gridColors}/>
+      <Grid gridLetters={gridLetters} gridColors={gridColors} currentRow={currentRow} setGridColors={setGridColors}/>
       <Keyboard 
         onKeyPress={handleVirtualKeyPress}
         layout={{'default': [
