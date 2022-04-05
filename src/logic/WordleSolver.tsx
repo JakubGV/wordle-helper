@@ -60,3 +60,43 @@ export const getTopKWords = (wordList: string[], k: number = 10): string[] => {
 
   return topKWords;
 }
+
+const countLetter = (word: string, letter: string): number => {
+  let count = 0;
+  for (const l of word) {
+    if (l === letter) {
+      count += 1;
+    }
+  }
+
+  return count;
+}
+
+const deleteIndices = (wordList: string[], indicesToDelete: Set<number>): string[] => {
+  let updatedWordList = [];
+  for (let i = 0; i < wordList.length; i++) {
+    if (!indicesToDelete.has(i)) {
+      updatedWordList.push(wordList[i]);
+    }
+  }
+  
+  return updatedWordList;
+}
+
+const findDuplicateLetter = (word: string): string => {
+  let seen = new Set();
+  for (const letter of word) {
+    if (seen.has(letter)) {
+      return letter;
+    }
+    else {
+      seen.add(letter);
+    }
+  }
+
+  return '';
+}
+
+const handleDuplicate = (wordList: string[], wordColors: string[], word: string, duplicateLetter: string): string[] => {
+  
+}
