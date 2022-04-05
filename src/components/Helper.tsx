@@ -5,7 +5,7 @@ import { Grid } from './Grid';
 import './Helper.css';
 
 import { WORD_LIST } from '../logic/WordList';
-import { getTopKWords } from '../logic/WordleSolver';
+import { getTopKWords, updateWordList } from '../logic/WordleSolver';
 
 const useKeydownListener = (handler: any) => {
   const savedHandler = useRef(handler);
@@ -52,7 +52,13 @@ export const Helper = () => {
   const [gridColors, setGridColors] = useState(defaultColors);
 
   const handleEnterPress = () => {
-    // Move to the next row
+    if (currentRow > 5) return;
+    
+    const updatedWordList = updateWordList(wordList, gridColors[currentRow], gridLetters[currentRow].join(''));
+
+    setWordList(updatedWordList);
+    setWordsLeft(updatedWordList.length);
+    setTop10Words(getTopKWords(updatedWordList));
     setCurrentRow(currentRow + 1);
     setCurrentCol(0);
   }
@@ -74,6 +80,8 @@ export const Helper = () => {
    * @param pressedKey The key that was pressed
    */
   const keyPressLogic = (pressedKey: string) => {
+    if (currentRow > 5) return;
+    
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     let col = currentCol;

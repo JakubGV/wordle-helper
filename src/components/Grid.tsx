@@ -5,8 +5,6 @@ export const Grid: FC<{ gridLetters: string[][], gridColors: string[][], current
   const setColors = (updatedColors: string[], rowIndex: number) => {
     if (rowIndex > currentRow) return; // Only allow colors changes on the current row
 
-    console.log('in set colors in grid');
-    
     let newGridColors = JSON.parse(JSON.stringify(gridColors)); // Deep copy the grid so that React can detect the grid colors updated and re-render the grid
     newGridColors[rowIndex] = updatedColors;
     setGridColors(newGridColors);
