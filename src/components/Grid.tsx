@@ -15,7 +15,7 @@ export const Grid: FC<{ gridLetters: string[][], gridColors: string[][], current
     {
       gridLetters.map( (row, index) => {
         return (
-          <LettersRow letters={row} colors={gridColors[index]} updateColors={(setColors)} rowIndex={index}/>
+          <LettersRow letters={row} colors={gridColors[index]} updateColors={(setColors)} rowIndex={index} key={index} />
         )
       })
     }

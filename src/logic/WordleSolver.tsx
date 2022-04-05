@@ -187,7 +187,7 @@ export const updateWordList = (wordList: string[], wordColors: string[], word: s
   word = word.toLowerCase();
   
   const duplicateLetter = findDuplicateLetter(word);
-  if (duplicateLetter !== '') handleDuplicate(wordList, wordColors, word, duplicateLetter);
+  if (duplicateLetter !== '') wordList = handleDuplicate(wordList, wordColors, word, duplicateLetter);
 
   const indicesToDelete = new Set<number>();
   for (let i = 0; i < wordColors.length; i++) {

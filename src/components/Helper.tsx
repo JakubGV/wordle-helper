@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { FC, useState, useEffect, useRef } from 'react';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import { Grid } from './Grid';
@@ -24,35 +24,48 @@ const useKeydownListener = (handler: any) => {
   }, [eventName]);
 };
 
-export const Helper = () => {
+export const Helper: FC<{ reset: boolean }> = ({ reset }) => {
   const [wordList, setWordList] = useState(JSON.parse(JSON.stringify(WORD_LIST))); // Deep copy the word list
   const [wordsLeft, setWordsLeft] = useState(wordList.length);
   const [top10Words, setTop10Words] = useState(getTopKWords(wordList));
   const [currentRow, setCurrentRow] = useState(0);
   const [currentCol, setCurrentCol] = useState(0);
   
-  const defaultGrid = [
+  const defaultGrid = useRef([
     [' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' '],
-  ];
-  const [gridLetters, setGridLetters] = useState(defaultGrid);
+  ]);
+  const [gridLetters, setGridLetters] = useState(defaultGrid.current);
 
-  const defaultColors = [
+  const defaultColors = useRef([
     ['b', 'b', 'b', 'b', 'b'],
     ['b', 'b', 'b', 'b', 'b'],
     ['b', 'b', 'b', 'b', 'b'],
     ['b', 'b', 'b', 'b', 'b'],
     ['b', 'b', 'b', 'b', 'b'],
     ['b', 'b', 'b', 'b', 'b'],
-  ]
-  const [gridColors, setGridColors] = useState(defaultColors);
+  ]);
+  const [gridColors, setGridColors] = useState(defaultColors.current);
 
+  useEffect(() => {
+    const resetBoard = () => {
+      setWordList(JSON.parse(JSON.stringify(WORD_LIST)));
+      setWordsLeft(WORD_LIST.length);
+      setTop10Words(getTopKWords(WORD_LIST));
+      setCurrentRow(0);
+      setCurrentCol(0);
+      setGridLetters(JSON.parse(JSON.stringify(defaultGrid.current))); // Deep copy for re-render
+      setGridColors(JSON.parse(JSON.stringify(defaultColors.current)));
+    }
+    resetBoard();
+  }, [reset])
+  
   const handleEnterPress = () => {
-    if (currentRow > 5) return;
+    if (currentRow > 5 || currentCol < 4) return;
     
     const updatedWordList = updateWordList(wordList, gridColors[currentRow], gridLetters[currentRow].join(''));
 
