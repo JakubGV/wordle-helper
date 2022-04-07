@@ -26,3 +26,15 @@
 .letter[bg-color="g"] {
   background-color: rgb(83, 141, 78);
 }
+
+@media screen and (max-height: 700px) {
+  .letter {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-height: 650px) {
+  .letter {
+    font-size: 2vh;
+  }
+}

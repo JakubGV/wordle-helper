@@ -129,7 +129,7 @@ export const Helper: FC<{ reset: boolean }> = ({ reset }) => {
   }
 
   return (
-    <>
+    <div className="helper-div">
       <div className="words-left">{wordsLeft} available words</div>
       <div className="middle">Top 10 words</div>
       <div className="top-words">{top10Words.slice(0,6).join(' ')}</div>
@@ -148,6 +148,6 @@ export const Helper: FC<{ reset: boolean }> = ({ reset }) => {
         }}
         theme={"hg-theme-default keyboard"}
       />
-    </>
+    </div>
   )
 }

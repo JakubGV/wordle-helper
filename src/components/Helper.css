@@ -1,12 +1,15 @@
+.helper-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .words-left, .middle, .top-words {
   text-align: center;
   color: white;
 }
 
-.top-words {
-  height: 25px;
-}
-
 .keyboard {
   background-color: rgb(18, 18, 19);
+  max-width: 500px;
 }

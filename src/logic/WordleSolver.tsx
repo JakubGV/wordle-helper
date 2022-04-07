@@ -151,13 +151,17 @@ const handleDuplicate = (wordList: string[], wordColors: string[], word: string,
       }
 
       if (wordColors[indexB] === 'b') {
-        if (countLetter(wordList[i], word[indexA]) > 1) {
+        if (countLetter(wordList[i], word[indexA]) > 1 || wordList[i][indexB] === word[indexB]) {
           indicesToDelete.add(i);
         }
       }
     }
 
     if (wordColors[indexA] === 'b') {
+      if (wordList[i][indexA] === word[indexA]) {
+        indicesToDelete.add(i);
+      }
+      
       if (wordColors[indexB] === 'g') {
         if (countLetter(wordList[i], word[indexA]) > 1 || wordList[i][indexB] !== word[indexB]) {
           indicesToDelete.add(i);
