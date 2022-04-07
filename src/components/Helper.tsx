@@ -114,7 +114,7 @@ export const Helper: FC<{ reset: boolean }> = ({ reset }) => {
     else if (tempLetters[4] !== ' ') { // Don't add more than 5 letters
       return;
     }
-    else if (letters.search(pressedKey) !== -1) { // If what was inputted is a valid letter, add the letter
+    else if (letters.indexOf(pressedKey) !== -1) { // If what was inputted is a valid letter, add the letter
       tempLetters[col] = pressedKey;
       col += 1;
     }
@@ -134,7 +134,7 @@ export const Helper: FC<{ reset: boolean }> = ({ reset }) => {
       <div className="middle">Top 10 words</div>
       <div className="top-words">{top10Words.slice(0,6).join(' ')}</div>
       <div className="top-words">{top10Words.slice(6, 10).join(' ')}</div>
-      <Grid gridLetters={gridLetters} gridColors={gridColors} currentRow={currentRow} setGridColors={setGridColors}/>
+      <Grid gridLetters={gridLetters} gridColors={gridColors} currentRow={currentRow} currentCol={currentCol} setGridColors={setGridColors}/>
       <Keyboard 
         onKeyPress={handleVirtualKeyPress}
         layout={{'default': [

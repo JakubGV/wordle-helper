@@ -9,11 +9,14 @@ type LettersRowProps = {
   letters: string[],
   colors: string[],
   rowIndex: number,
+  colIndex: number,
   updateColors: ColorsCallback
 }
 
-export const LettersRow: FC <LettersRowProps> = ({ letters, colors, rowIndex, updateColors }) => {
-  const handleClick = (index: number, rowIndex: number) => {
+export const LettersRow: FC <LettersRowProps> = ({ letters, colors, rowIndex, colIndex, updateColors }) => {
+  const handleClick = (index: number) => {
+    if (index > colIndex - 1) return;
+
     let updatedColor = colors[index];
     if (updatedColor === 'b') {
       updatedColor = 'y';
@@ -36,7 +39,7 @@ export const LettersRow: FC <LettersRowProps> = ({ letters, colors, rowIndex, up
       {
         letters.map( (letter: string, index) => {
           return (
-            <div className="letter" bg-color={colors[index]} onClick={() => handleClick(index, rowIndex)} key={index}>{letter}</div>
+            <div className="letter" bg-color={colors[index]} onClick={() => handleClick(index)} key={index}>{letter}</div>
           )
         })
       }

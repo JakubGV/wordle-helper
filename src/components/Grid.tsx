@@ -1,7 +1,15 @@
 import { FC } from 'react';
 import { LettersRow } from './LettersRow';
 
-export const Grid: FC<{ gridLetters: string[][], gridColors: string[][], currentRow: number, setGridColors: any }> = ({ gridLetters, gridColors, currentRow, setGridColors }) => {
+interface GridProps {
+  gridLetters: string[][],
+  gridColors: string[][],
+  currentRow: number,
+  currentCol: number,
+  setGridColors: React.Dispatch<React.SetStateAction<string[][]>>
+}
+
+export const Grid: FC<GridProps> = ({ gridLetters, gridColors, currentRow, currentCol, setGridColors }) => {
   const setColors = (updatedColors: string[], rowIndex: number) => {
     if (rowIndex > currentRow) return; // Only allow colors changes on the current row
 
@@ -13,9 +21,9 @@ export const Grid: FC<{ gridLetters: string[][], gridColors: string[][], current
   return (
     <>
     {
-      gridLetters.map( (row, index) => {
+      gridLetters.map( (letters: string[], index: number) => {
         return (
-          <LettersRow letters={row} colors={gridColors[index]} updateColors={(setColors)} rowIndex={index} key={index} />
+          <LettersRow letters={letters} colors={gridColors[index]} updateColors={(setColors)} rowIndex={index} colIndex={currentCol} key={index} />
         )
       })
     }
