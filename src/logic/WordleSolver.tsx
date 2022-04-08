@@ -1,4 +1,4 @@
-export const getWordScore = (word: string): number => {
+const getWordScore = (word: string): number => {
   const SCORE_SHEET = {
     'e': 56.88,
     'a': 43.31,
