@@ -9,6 +9,10 @@
   color: white;
 }
 
+.top-words {
+  height: 1.4em;
+}
+
 .keyboard {
   background-color: rgb(18, 18, 19);
   max-width: 500px;

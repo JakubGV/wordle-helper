@@ -1,12 +1,15 @@
 import { FC, useState, useEffect, useRef } from 'react';
+
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
-import { Grid } from './Grid';
-import './Helper.css';
 
+import { Grid } from './Grid';
 import { WORD_LIST } from '../logic/WordList';
 import { getTopKWords, updateWordList } from '../logic/WordleSolver';
 
+import './Helper.css';
+
+// Function that binds the `handler` function to the 'keydown' event 
 const useKeydownListener = (handler: any) => {
   const savedHandler = useRef(handler);
   const eventName = 'keydown';
@@ -24,6 +27,11 @@ const useKeydownListener = (handler: any) => {
   }, [eventName]);
 };
 
+/**
+ * Renders how many words are left, the best words to choose, the Grid of letters, and the virtual keyboard.
+ * @param reset A boolean value that changes when a reset is requested
+ * @returns A helper `<div>` along with the `<Grid /> and '<Keyboard />`
+ */
 export const Helper: FC<{ reset: boolean }> = ({ reset }) => {
   const [wordList, setWordList] = useState(JSON.parse(JSON.stringify(WORD_LIST))); // Deep copy the word list
   const [wordsLeft, setWordsLeft] = useState(wordList.length);
@@ -51,6 +59,7 @@ export const Helper: FC<{ reset: boolean }> = ({ reset }) => {
   ]);
   const [gridColors, setGridColors] = useState(defaultColors.current);
 
+  // Reset the board everytime the `reset` prop changes
   useEffect(() => {
     const resetBoard = () => {
       setWordList(JSON.parse(JSON.stringify(WORD_LIST)));
@@ -64,18 +73,6 @@ export const Helper: FC<{ reset: boolean }> = ({ reset }) => {
     resetBoard();
   }, [reset])
   
-  const handleEnterPress = () => {
-    if (currentRow > 5 || currentCol < 4) return;
-    
-    const updatedWordList = updateWordList(wordList, gridColors[currentRow], gridLetters[currentRow].join(''));
-
-    setWordList(updatedWordList);
-    setWordsLeft(updatedWordList.length);
-    setTop10Words(getTopKWords(updatedWordList));
-    setCurrentRow(currentRow + 1);
-    setCurrentCol(0);
-  }
-
   // Handles a press on a physical keyboard
   const handleKeyPress = (event: KeyboardEvent) => {
     const pressedKey = event.key.toUpperCase();
@@ -89,11 +86,11 @@ export const Helper: FC<{ reset: boolean }> = ({ reset }) => {
   }
   
   /**
-   * Sanitizes keyboard input and only allows letters, a backspace, or enter to be acted upon
+   * Sanitizes keyboard input and only allows letters, a backspace, or enter to be acted upon.
    * @param pressedKey The key that was pressed
    */
   const keyPressLogic = (pressedKey: string) => {
-    if (currentRow > 5) return;
+    if (currentRow > 5) return; // Ignore key presses if all rows have words
     
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
@@ -126,6 +123,19 @@ export const Helper: FC<{ reset: boolean }> = ({ reset }) => {
     
     setCurrentCol(col);
     setGridLetters(tempGridLetters);
+  }
+  
+  // When enter is pressed, use the current letters and colors to updated the word list and associated values
+  const handleEnterPress = () => {
+    if (currentRow > 5 || currentCol < 4) return; // Ignore enter presses after 6 rows or before a row is full
+    
+    const updatedWordList = updateWordList(wordList, gridColors[currentRow], gridLetters[currentRow].join(''));
+
+    setWordList(updatedWordList);
+    setWordsLeft(updatedWordList.length);
+    setTop10Words(getTopKWords(updatedWordList));
+    setCurrentRow(currentRow + 1);
+    setCurrentCol(0);
   }
 
   return (

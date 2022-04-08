@@ -6,14 +6,19 @@ import { Instructions } from './components/Instructions';
 import resetIcon from './media/reset.svg';
 import helpIcon from './media/question.svg';
 
+/**
+ * Renders a header with a title, instructions, and reset button along with `<Helper />`
+ */
 const WordleHelper = () => {
   const [reset, setReset] = useState<boolean>(false);
   const [showHelp, setShowHelp] = useState<boolean>(false);
   
+  // Show the help pop-up when the help button is clicked
   const handleHelpClick = () => {
     setShowHelp(true);
   }
   
+  // Toggle reset when the reset button is clicked
   const handleResetClick = () => {
     setReset(!reset);
   }
