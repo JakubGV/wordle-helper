@@ -140,8 +140,8 @@ export const Helper: FC<{ reset: boolean }> = ({ reset }) => {
 
   return (
     <div className="helper-div">
-      <div className="words-left">{wordsLeft} available words</div>
-      <div className="middle">Top 10 words</div>
+      <div className="words-left"><b>{wordsLeft}</b> words</div>
+      <div className="middle">Top {wordsLeft > 10 ? 10 : wordsLeft}:</div>
       <div className="top-words">{top10Words.slice(0,6).join(' ')}</div>
       <div className="top-words">{top10Words.slice(6, 10).join(' ')}</div>
       <Grid gridLetters={gridLetters} gridColors={gridColors} currentRow={currentRow} currentCol={currentCol} setGridColors={setGridColors}/>

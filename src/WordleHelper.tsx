@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import './WordleHelper.css';
 
 import { Helper } from './components/Helper';
 import { Instructions } from './components/Instructions';
 import resetIcon from './media/reset.svg';
 import helpIcon from './media/question.svg';
+
+import './WordleHelper.css';
 
 /**
  * Renders a header with a title, instructions, and reset button along with `<Helper />`
