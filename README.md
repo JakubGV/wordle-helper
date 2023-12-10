@@ -7,6 +7,8 @@ The web application is [accessible](https://jakubgvogel.com/wordle-helper/) on G
 ## Installing and Running
 This project was built using [React](https://reactjs.org/). The dependencies for React are well documented but include Node.js, to be able to locally run JavaScript, and npm, a package manager. Specific dependencies can be installed using npm, with a command to `npm install` installing all the required packages described in [package.json](./package.json).
 
+The project is deployed to Github pages by running `npm run deploy` in a git terminal.
+
 ## Using the Project
 Type in the word you guessed, select the letter until it is the right color, and press enter to see the amount of words left and the suggested top 10 words to guess!
 
